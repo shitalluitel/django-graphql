@@ -1,30 +1,9 @@
 from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth import logout
-from django.contrib.auth.decorators import login_required
-from django.http.response import HttpResponse, JsonResponse
-from django.shortcuts import redirect
-from django.template import loader
+from django.http.response import JsonResponse
 from graphene_django.views import GraphQLView, HttpError
 
 
-@login_required
-def dashboard_render(request):
-    if not settings.USE_DEPLOY:
-        template = loader.get_template('application.html')
-    else:
-        template = loader.get_template('deploy.html')
-    context = {}
-    return HttpResponse(template.render(context, request))
-
-
-def logout_request(request):
-    logout(request)
-    messages.info(request, "You have successfully logged out.")
-    return redirect("app")
-
-
-class DevCustomGraphQLView(GraphQLView):
+class CustomGraphQLView(GraphQLView):
     def _has_permission(self):
         if not settings.DEBUG:
             raise HttpError(
