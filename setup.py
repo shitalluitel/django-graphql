@@ -25,11 +25,11 @@ setup(
         "Environment :: Web Environment",
         "Framework :: Django",
         "Framework :: Django :: 3.1",
-        "Intended Audience :: Developers"
-        "Operating System :: OS Independent"
-        "Programming Language :: Python"
-        "Programming Language :: Python :: 3"
-        "Programming Language :: Python :: 3 :: Only"
+        "Intended Audience :: Developers",
+        "Operating System :: OS Independent",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3",
+        "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.8",
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
