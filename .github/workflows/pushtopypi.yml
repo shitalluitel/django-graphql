@@ -14,11 +14,6 @@ jobs:
       uses: actions/setup-python@v1
       with:
         python-version: 3.8
-    - name: Test with pytest
-      run: |
-        pip install pytest
-        export PYTHONPATH=src
-        pytest
     - name: Deploy to Pypi
       env:
         PYPI_USERNAME: ${{ secrets.PYPI_USERNAME }}
