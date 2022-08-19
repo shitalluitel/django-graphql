@@ -15,6 +15,7 @@ def get_version():
 setup(
     name="django-graphql",
     version=get_version(),
+    license="file: LICENSE.txt",
     description="A package that makes easier to use graphql with django.",
     long_description="file: README.md",
     url="https://shitalluitel.com.np",
