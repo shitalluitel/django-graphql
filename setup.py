@@ -13,13 +13,13 @@ def get_version():
 
 
 setup(
-    name="django-graphql",
+    name="djgraphql",
     version=get_version(),
     license="file: LICENSE.txt",
     description="A package that makes easier to use graphql with django.",
     long_description="file: README.md",
     url="https://shitalluitel.com.np",
-    author="Shital Luitel",
+    author="Shital Babu Luitel",
     author_email="ctalluitel@gmail.com",
     classifiers=[
         "Environment :: Web Environment",
