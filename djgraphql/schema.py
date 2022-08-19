@@ -2,21 +2,23 @@ import graphene
 from graphene_django.debug import DjangoDebug
 
 from .settings import api_settings
+from .utils import get_resolver_class
 
 
 def generate_class(_type='Query'):
     graphql_apps = api_settings.GRAPHQL_APPS or []
+    resolver = f'{_type.upper()}_RESOLVERS'
     for app in graphql_apps:
         schema_path = f"{app}.graphql.schema"
         try:
-            mod = __import__(schema_path, fromlist=[_type])
-            if hasattr(mod, _type):
-                klass = getattr(mod, _type)
-                if klass:
-                    yield klass
-        except ModuleNotFoundError as e:
+            mod = __import__(schema_path, fromlist=[resolver])
+            if hasattr(mod, resolver):
+                resolvers = getattr(mod, resolver)
+                if resolvers:
+                    yield get_resolver_class(resolvers)
+        except ModuleNotFoundError:
             ...
-        except ImportError as e:
+        except ImportError:
             ...
 
 
