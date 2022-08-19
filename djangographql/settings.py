@@ -2,7 +2,7 @@ from django.conf import settings
 from django.test.signals import setting_changed
 from django.utils.module_loading import import_string
 
-from graphql.defaults import get_defaults
+from .defaults import get_defaults
 
 
 def perform_import(val, setting_name):
@@ -32,8 +32,7 @@ def import_from_string(val, setting_name):
 
 class ImportSettings:
     def defaults(self):
-        used_payments = getattr(settings, 'USED_PAYMENTS')
-        params = get_defaults(used_payments)
+        params = get_defaults()
         new_defaults = {}
         for key, value in params.items():
             try:
