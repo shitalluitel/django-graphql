@@ -30,7 +30,7 @@ We need to add a `graphql` URL to the `urls.py` of your Django project:
 
 ```python
 from django.urls import path, include
-from djangographql.urls import urlpatterns as graphql_urls 
+from djangographql.urls import urlpatterns as graphql_urls
 
 urlpatterns = [
     # ...
@@ -38,3 +38,18 @@ urlpatterns = [
 ]
 ```
 
+## Settings
+
+You need to list out all those apps which contains graphql within your project. For that you need to add name of each
+app containing graphql as a list to `GRAPHQL_APPS` within `settings.py`.
+
+```python
+GRAPHQL_APPS = [
+    ...,
+    'foo',
+]
+```
+
+Other settings are similar to graphene-django and django itself.
+
+## Implementation
