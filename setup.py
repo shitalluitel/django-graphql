@@ -37,8 +37,7 @@ setup(
     packages=find_packages(),
     python_requires=">=3.8",
     install_requires=[
-        'django',
-        'djangorestframework',
+        'django==3',
         'graphene-django',
     ],
 )
