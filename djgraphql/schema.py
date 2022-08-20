@@ -1,12 +1,11 @@
 import graphene
-from graphene import Schema as GrapheneSchema
 from graphene_django.debug import DjangoDebug
 
 from .settings import api_settings
 from .utils import get_resolver_class
 
 
-class Schema(object):
+class SchemaGenerator(object):
     def Query(self) -> type:  # noqa
         """
         Collects all query related resolvers and create query class used
@@ -39,10 +38,10 @@ class Schema(object):
             }
         )
 
-    def generate(self) -> GrapheneSchema:
-        return GrapheneSchema(
-            query=self.Query,
-            mutation=self.Mutation
+    def generate(self):
+        return graphene.Schema(
+            query=self.Query(),
+            mutation=self.Mutation()
         )
 
     @staticmethod
@@ -63,3 +62,4 @@ class Schema(object):
                 resolvers = getattr(mod, resolver)
                 if resolvers:
                     yield get_resolver_class(resolvers)
+
