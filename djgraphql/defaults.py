@@ -16,7 +16,8 @@ def update_defaults(default, class_name):
     default.update(defaults)
 
 
-def get_defaults():
-    agg_defaults = {}
+def get_defaults(agg_defaults=None):
+    if not agg_defaults:
+        agg_defaults = {}
     update_defaults(agg_defaults, 'Defaults')
     return agg_defaults
