@@ -61,16 +61,14 @@ class APISettings:
     apps, and test helpers like `override_settings` may not work as expected.
     """
 
-    def __init__(self, user_settings=None, defaults=None):
-        if user_settings:
-            self._user_settings = self.__check_user_settings(user_settings)
+    def __init__(self, defaults=None):
         self.defaults = defaults or DEFAULTS
         self._cached_attrs = set()
 
     @property
     def user_settings(self):
         if not hasattr(self, '_user_settings'):
-            self._user_settings = DEFAULTS
+            setattr(self, '_user_settings', self.defaults)
         return self._user_settings
 
     def __getattr__(self, attr):
@@ -95,7 +93,7 @@ class APISettings:
             delattr(self, '_user_settings')
 
 
-api_settings = APISettings(None, DEFAULTS)
+api_settings = APISettings(DEFAULTS)
 
 
 def reload_api_settings(*args, **kwargs):
