@@ -1,9 +1,9 @@
 import graphene
 
 
-def get_resolver_class(resolvers: list, _type='Query') -> type:
+def get_resolver_class(resolvers: list, resolver_type: str = 'Query') -> type:
     return type(
-        _type,
+        resolver_type,
         (
             *resolvers,
             graphene.ObjectType
