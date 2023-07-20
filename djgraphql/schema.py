@@ -3,7 +3,7 @@ from collections import defaultdict
 import graphene
 from graphene_django.debug import DjangoDebug
 
-from djql.utils.routes import DefaultRouter
+from djgraphql.utils.routes import DefaultRouter
 
 __all__ = [
     'schema',
