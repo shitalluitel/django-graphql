@@ -3,4 +3,4 @@ include README.md
 include requirements.txt
 include Pipfile
 include Pipfile.lock
-recursive-include djql *
+recursive-include djgraphql *
