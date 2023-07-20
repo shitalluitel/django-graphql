@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class DjangographqlConfig(AppConfig):
-    name = 'djgraphql'
+    name = 'djql'
