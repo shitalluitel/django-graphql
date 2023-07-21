@@ -42,8 +42,21 @@ class DefaultRouter(object):
 
     @property
     def query(self):
-        return self._query_resolvers
+        return type(
+            'Query',
+            (
+                *self._query_resolvers,
+                graphene.ObjectType
+            ),
+            {}
+        )
 
     @property
     def mutation(self):
-        return self._mutation_resolvers
+        return type(
+            'Mutation',
+            (
+                graphene.ObjectType,
+            ),
+            {}
+        )

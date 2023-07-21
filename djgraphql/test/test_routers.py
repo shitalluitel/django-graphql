@@ -17,7 +17,7 @@ class TestDefaultRouter:
             resolver=query,
             method=MethodType.QUERY
         )
-        assert router.query == [query]
+        assert router.query ==
 
         # 2. Register mutation resolvers
         mutation = ResolverGenerator('MutationResolver')
