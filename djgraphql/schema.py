@@ -52,14 +52,15 @@ class Schema(metaclass=SchemaMeta):
             self._resolvers['mutation'].append(*mutations)
 
     def generate(self):
-        Query = SchemaParameters('Query', *self._resolvers['query'])  # noqa
-        Mutation = SchemaParameters('Mutation', *self._resolvers['mutation'])  # noqa
-        print(Query)
-        print(Mutation)
-        return graphene.Schema(
-            query=Query,
-            mutation=Mutation
-        )
+        query_resolvers = self._resolvers['query'] or []
+        mutation_resolvers = self._resolvers['mutation'] or []
+
+        schema_params = dict()
+
+        schema_params['query'] = SchemaParameters('Query', *query_resolvers)  # noqa
+        schema_params['mutation'] = SchemaParameters('Mutation', *mutation_resolvers)  # noqa
+
+        return graphene.Schema(**schema_params)
 
 
 schema = Schema()
