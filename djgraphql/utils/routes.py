@@ -2,7 +2,7 @@ from typing import Optional
 
 import graphene
 
-from resolver import Resolver
+from djgraphql.utils.resolver import Resolver
 
 __all__ = [
     'MethodType',
