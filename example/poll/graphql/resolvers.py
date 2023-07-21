@@ -1,7 +1,7 @@
 import graphene
 from django.utils import timezone
 
-from poll.graphql.types import QuestionNode
+from poll.graphql.nodes import QuestionNode
 from poll.models import Question
 
 
