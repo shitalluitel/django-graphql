@@ -42,10 +42,11 @@ class DefaultRouter(object):
 
     @property
     def query(self):
+        query_resolver = self._query_resolvers or []
         return type(
             'Query',
             (
-                *self._query_resolvers,
+                *query_resolver,
                 graphene.ObjectType
             ),
             {}
@@ -53,9 +54,11 @@ class DefaultRouter(object):
 
     @property
     def mutation(self):
+        mutation_resolver = self._mutation_resolvers or []
         return type(
             'Mutation',
             (
+                *mutation_resolver,
                 graphene.ObjectType,
             ),
             {}
