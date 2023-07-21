@@ -1,9 +1,10 @@
 from collections import defaultdict
 
 import graphene
-from graphene_django.debug import DjangoDebug
 
 from djgraphql.utils.routes import DefaultRouter
+
+# from graphene_django.debug import DjangoDebug
 
 __all__ = [
     'schema',
@@ -11,17 +12,20 @@ __all__ = [
 
 
 class SchemaParameters:
-    debug = graphene.Field(DjangoDebug, name='_debug')
+    # debug = graphene.Field(DjangoDebug, name='_debug')
 
     def __new__(cls, name, *args, **kwargs):
         klass = type(
             name,
-            args,
+            (
+                *args,
+                graphene.ObjectType
+            ),
             {
-                'debug': cls.debug
+                # 'debug': cls.debug
             }
         )
-        return klass()
+        return klass
 
 
 class SchemaMeta(type):
@@ -38,16 +42,15 @@ class Schema(metaclass=SchemaMeta):
     _resolvers = defaultdict(list)
 
     def register(self, resolver: DefaultRouter):
-        self._resolvers['query'].append(resolver.query)
-        self._resolvers['mutation'].append(resolver.mutations)
+        self._resolvers['query'].append(*resolver.query)
+        self._resolvers['mutation'].append(*resolver.mutation)
 
     def generate(self):
-        query = SchemaParameters('Query', self._resolvers['query'])
-        mutation = SchemaParameters('Query', self._resolvers['query'])
-
+        Query = SchemaParameters('Query', *self._resolvers['query'])  # noqa
+        Mutation = SchemaParameters('Mutation', *self._resolvers['mutation'])  # noqa
         return graphene.Schema(
-            query=query,
-            mutation=mutation
+            query=Query,
+            mutation=Mutation
         )
 
 

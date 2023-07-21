@@ -32,17 +32,18 @@ class DefaultRouter(object):
         if isinstance(method, MethodType):
             raise ValueError(f'method must be either {Query} or {Mutation}.')
 
-        routers = getattr(self, f'_{method.value}_routers')
+        resolvers = getattr(self, f'_{method.value}_resolvers')
 
-        if routers is None:
-            routers = []
+        if resolvers is None:
+            setattr(self, f'_{method.value}_resolvers', [])
+            resolvers = getattr(self, f'_{method.value}_resolvers')
 
-        routers.append(resolver)
+        resolvers.append(resolver)
 
     @property
     def query(self):
         return self._query_resolvers
 
     @property
-    def mutations(self):
+    def mutation(self):
         return self._mutation_resolvers
