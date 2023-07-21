@@ -42,12 +42,20 @@ class Schema(metaclass=SchemaMeta):
     _resolvers = defaultdict(list)
 
     def register(self, resolver: DefaultRouter):
-        self._resolvers['query'].append(*resolver.query)
-        self._resolvers['mutation'].append(*resolver.mutation)
+        queries = resolver.query
+        if queries:
+            self._resolvers['query'].append(*queries)
+
+        mutations = resolver.mutation
+
+        if mutations:
+            self._resolvers['mutation'].append(*mutations)
 
     def generate(self):
         Query = SchemaParameters('Query', *self._resolvers['query'])  # noqa
         Mutation = SchemaParameters('Mutation', *self._resolvers['mutation'])  # noqa
+        print(Query)
+        print(Mutation)
         return graphene.Schema(
             query=Query,
             mutation=Mutation
