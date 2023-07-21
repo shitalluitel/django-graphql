@@ -4,7 +4,7 @@ from djgraphql.utils.routes import DefaultRouter, MethodType
 
 class ResolverGenerator:
     def __new__(cls, name, *args, **kwargs):
-        return type(name, (Resolver,), {})
+        return type(name, (Resolver,), kwargs)
 
 
 class TestDefaultRouter:

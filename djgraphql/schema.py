@@ -60,6 +60,8 @@ class Schema(metaclass=SchemaMeta):
         schema_params['query'] = SchemaParameters('Query', *query_resolvers)  # noqa
         schema_params['mutation'] = SchemaParameters('Mutation', *mutation_resolvers)  # noqa
 
+        print(schema_params)
+
         return graphene.Schema(**schema_params)
 
 
